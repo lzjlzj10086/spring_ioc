@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+<!--
+    scope：prototype 多例 每次获取bean时，就创建
+           singleton 单例（默认）在加载配置文件创建容器就创建
+-->
+    <bean id="userDao" class="com.dao.impl.UserDaoImpl" scope="singleton"></bean>
+    <!--set方法依赖注入-->
+    <bean id="userService" class="com.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <!--构造方法依赖注入-->
+    <bean id="userService02" class="com.service.impl.UserServiceImpl02">
+        <constructor-arg name="userDao" ref="userDao"></constructor-arg>
+    </bean>
+
+</beans>
